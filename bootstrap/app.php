@@ -16,9 +16,10 @@ return Application::configure(basePath: dirname(__DIR__))
             'install' => \App\Http\Middleware\CheckInstallation::class,
         ]);
         // Apply installation check to web routes
-        $middleware->web(append: [
-            \App\Http\Middleware\CheckInstallation::class,
-        ]);
+        // TEMPORARILY DISABLED - Enable after installation completes
+        // $middleware->web(append: [
+        //     \App\Http\Middleware\CheckInstallation::class,
+        // ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //

@@ -15,6 +15,18 @@ use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\CourseController as AdminCourseController;
 use App\Http\Controllers\Admin\CourseRegistrationController;
 use App\Http\Controllers\CourseController;
+use App\Http\Controllers\InstallController;
+
+// Installation Routes (No middleware - accessible before installation)
+Route::prefix('install')->name('install.')->group(function () {
+    Route::get('/', [InstallController::class, 'index'])->name('index');
+    Route::get('/requirements', [InstallController::class, 'requirements'])->name('requirements');
+    Route::get('/database', [InstallController::class, 'database'])->name('database');
+    Route::post('/database', [InstallController::class, 'databaseStore'])->name('database.store');
+    Route::get('/admin', [InstallController::class, 'admin'])->name('admin');
+    Route::post('/install', [InstallController::class, 'install'])->name('process');
+    Route::get('/complete', [InstallController::class, 'complete'])->name('complete');
+});
 
 // Frontend Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');

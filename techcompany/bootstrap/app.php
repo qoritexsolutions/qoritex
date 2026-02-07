@@ -13,6 +13,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->alias([
             'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'install' => \App\Http\Middleware\CheckInstallation::class,
+        ]);
+        // Apply installation check to web routes
+        $middleware->web(append: [
+            \App\Http\Middleware\CheckInstallation::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
